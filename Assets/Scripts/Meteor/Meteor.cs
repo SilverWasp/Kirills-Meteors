@@ -23,7 +23,7 @@ public class Meteor : MonoBehaviour
     public void Kick(Vector2 direction)
     {
         rb.velocity = direction.normalized * speed;
-        rb.AddTorque(UnityEngine.Random.Range(-50, 50));
+        rb.AddTorque(UnityEngine.Random.Range(-50, 50)); // didnt work eventualy and dont know why, wanted to ask you, intended to make the metal scraps rotate in space
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -39,7 +39,6 @@ public class Meteor : MonoBehaviour
         if (collision.tag == "Laser")
         {
             OnLaserHitMeteor?.Invoke(points);
-            // make VFX with particle system explosion prefab, make instanciate in meteor position
             Destroy(gameObject);
         }
     }
@@ -51,11 +50,7 @@ public class Meteor : MonoBehaviour
            
             collision.gameObject.SetActive(false); // player
             gameObject.SetActive(false); // meteor
-            // make VFX with particle system explosion prefab, make instanciate in player position
-
             Destroy(collision.gameObject);
-            // wait for time with coroutine
-            // move to Lose scene
             OnMeteorHitPlayer?.Invoke(-1);
             Destroy(gameObject);
         }

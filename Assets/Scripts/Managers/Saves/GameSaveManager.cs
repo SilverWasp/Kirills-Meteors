@@ -42,7 +42,7 @@ public class GameSaveManager : SaveManager
 
         scoreM.Score = data.score;
         livesM.Lives = data.lives;
-        stageM.Stage = data.stage;
+        stageM.Stage = data.stage; // mainly for the continue button that was scraped
     }
 
     public Vector2 ReturnData()
@@ -65,7 +65,6 @@ public class GameSaveManager : SaveManager
     {
         string path = $"{Application.persistentDataPath}/{saveFolderName}/{saveFileName}";
         PlayerSavedData data = new PlayerSavedData();
-        Debug.Log(path);
         Directory.CreateDirectory(Path.GetDirectoryName(path));
 
         string dataToSave = JsonConvert.SerializeObject(data, Formatting.Indented);

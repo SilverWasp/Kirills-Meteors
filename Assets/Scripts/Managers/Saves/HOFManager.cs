@@ -22,6 +22,7 @@ public class HOFManager : SaveManager
     public void SaveData()
     {
         string path = $"{Application.persistentDataPath}/{saveFolderName}/{saveFileName}";
+        // makes sure that if a player chosses a blank name when wining or losing it will still write his score but if there is a name it findes it from both input fields
         HallOfFamePlayerData data = new HallOfFamePlayerData(playerName.text == ""? (winPlayerName.text == ""? playerName.text : winPlayerName.text) : playerName.text, scoreM.Score, livesM.Lives > 0);
         if (File.Exists(path))
         {

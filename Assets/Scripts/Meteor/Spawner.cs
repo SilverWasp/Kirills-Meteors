@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
 
     }
 
-    private void Start()
+    private void Start() // norman shewed and expplained this one after i had a bug with spawning meteprs now known as scrap metals
     {
         InvokeRepeating("Spawn", 0, spawnRate);
     }

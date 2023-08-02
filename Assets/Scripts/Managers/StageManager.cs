@@ -62,12 +62,12 @@ public class StageManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name != "Main Menu" && SceneManager.GetActiveScene().name != "Hall Of Fame") 
         {
             gameState = true;
-            for (int i = 0; i < toDisable.Length; i++)
+            for (int i = 0; i < toDisable.Length; i++) // after win/lose disabled score, lives, time displays and player, this function enables them at the start of the stage
             {
                 toDisable[i].SetActive(true);
             }
             gameSaveManager.LoadData();
-            lastStage = stage;
+            lastStage = stage; // intended for the continue button that was scraped at the end
             stage = SceneManager.GetActiveScene().name;
             
         }
@@ -86,7 +86,7 @@ public class StageManager : MonoBehaviour
         }
         Time.timeScale = 1.0f;
     }
-    public bool GetGameState()
+    public bool GetGameState() //is the player in PLAYING state or WIN/LOSE state
     {
         return gameState;
     }
@@ -103,7 +103,7 @@ public class StageManager : MonoBehaviour
         SceneManager.LoadScene("Stage 1");
     }
 
-    public void ContinueLastCamaign()
+    public void ContinueLastCamaign() // didnt have time to implement, i deleted the button from main menu, decided not to touch because of time deficiency
     {
         if (lastStage != null)
         {
@@ -122,11 +122,10 @@ public class StageManager : MonoBehaviour
             element.SetActive(false);
             
         }
-        //Time.timeScale = 0;
         lose.SetActive(true);
     }
 
-    public void GoToHOF() 
+    public void GoToHOF() // go to hall of fame
     {
         HOFM.SaveData();
         SceneManager.LoadScene("Hall Of Fame");
@@ -135,7 +134,7 @@ public class StageManager : MonoBehaviour
     public void Win()
     {
         gameState = false;
-        for (int i = 0; i < toDisable.Length; i++)
+        for (int i = 0; i < toDisable.Length; i++)// disables score lives and time displayes and player
         {
             toDisable[i].SetActive(false);
         }
@@ -148,12 +147,11 @@ public class StageManager : MonoBehaviour
                      
         win.SetActive(true);
         GetComponent<ScoreManager>().AddFinalScore(temp.y);
-        if (SceneManager.GetActiveScene().name != "Final Stage")
+        if (SceneManager.GetActiveScene().name != "Final Stage") // addes 1 life after win if not in the final stage
         {
             GetComponent<LivesManager>().AddLife();
         }
         gameSaveManager.SaveData();
-        Debug.Log("saved");
     }
     public void ExitToMainMenu()
     {
@@ -164,7 +162,5 @@ public class StageManager : MonoBehaviour
     public void ExitToDesktop()
     {
         Application.Quit();
-    }
-
-    
+    }  
 }
